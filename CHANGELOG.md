@@ -1,3 +1,21 @@
+## [0.38.0] - 2026-08-27
+
+### Added
+- Athlete store теперь синхронизирует bodyweight при загрузке состояния.
+- Серверные точки объединяются с локальными через server-preferred merge.
+- При недоступности dedicated endpoint сохраняются bodyweight данные из state.
+- Исправлен отсутствующий импорт  в AthleteApp.
+- Добавлены store-level regression tests для remote merge и fallback.
+
+### Verification
+- Frontend tests: 40 passed.
+- Frontend production build: passed.
+- Backend tests: 22 passed, 2 skipped.
+- Preview API health: 200.
+- Bodyweight endpoint without auth: 401.
+- Preview HTTPS/PWA smoke: passed.
+- git diff --check: passed.
+
 ## [0.37.0] - 2026-08-27
 
 ### Added
