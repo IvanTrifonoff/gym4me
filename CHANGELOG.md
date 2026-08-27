@@ -2,6 +2,31 @@
 
 Все заметные изменения проекта фиксируются здесь. Версии используют [Semantic Versioning](https://semver.org/): `MAJOR.MINOR.PATCH`.
 
+## [0.4.0] - 2026-08-27
+
+### Added
+- Первый Athlete frontend vertical slice на React/Vite.
+- Единый `PwaShell` для мобильного PWA-интерфейса.
+- Athlete-разделы: Главная, План, Тренировка, Статистика, История, Библиотека, Настройки и Уведомления.
+- Athlete-only настройки единиц веса, звука, удержания экрана, темы и языка.
+- Единые safe-area, цвета, surface, tabbar и reduced-motion правила.
+- Frontend smoke test навигационного контракта.
+
+### Compatibility
+- Backend, passkey и legacy authentication не изменялись.
+- Trainer/Gym UI не подключается к Athlete frontend state.
+- Production `/opt/opengym` не изменялся.
+
+### Verification
+- Frontend production build: passed.
+- Frontend Vitest: 1 passed, 0 failed.
+- Backend regression suite до изменений: 12 passed, 0 failed.
+- Release/version verification: passed.
+- `git diff --check`: passed.
+
+### Limitations
+- Разделы кроме Главной и Настроек пока отображают migration placeholder; перенос их legacy-логики выполняется отдельными Ralph-срезами.
+
 ## [0.3.1] - 2026-08-27
 
 ### Added
