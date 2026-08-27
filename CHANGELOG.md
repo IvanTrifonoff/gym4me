@@ -2,6 +2,30 @@
 
 Все заметные изменения проекта фиксируются здесь. Версии используют [Semantic Versioning](https://semver.org/): `MAJOR.MINOR.PATCH`.
 
+## [0.15.0] - 2026-08-27
+
+### Added
+- Перенесён Athlete Notifications module.
+- Добавлена нормализация legacy notification DTO.
+- Добавлен unread/read state и счётчик непрочитанных уведомлений.
+- Добавлена автоматическая отметка уведомлений прочитанными при открытии раздела.
+- Добавлена безопасная внутренняя навигация из notification payload.
+- Добавлены уведомления о push, баллах, наградах и записях в едином списке.
+- Notifications подключены к Athlete PWA navigation.
+
+### Security and compatibility
+- Внешние URL из payload блокируются; разрешены только внутренние пути приложения.
+- Passkey, `gymsid`, Athlete API, Web Push и PWA shell не изменялись.
+- Trainer/Gym notification data не смешиваются с Athlete state.
+- Production `/opt/opengym` не изменялся.
+
+### Verification
+- Backend tests: 12 passed, 0 failed.
+- Frontend tests: 20 passed, 0 failed.
+- Frontend production build: passed.
+- Node syntax check: passed.
+- `git diff --check`: passed.
+
 ## [0.14.0] - 2026-08-27
 
 ### Added
