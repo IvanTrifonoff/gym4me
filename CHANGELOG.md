@@ -2,6 +2,34 @@
 
 Все заметные изменения проекта фиксируются здесь. Версии используют [Semantic Versioning](https://semver.org/): `MAJOR.MINOR.PATCH`.
 
+## [0.22.0] - 2026-08-27
+
+### Added
+- Добавлена PostgreSQL schema `athlete_workout_history`.
+- Добавлены индексы по athlete и workout date.
+- Добавлен Node `pg` pool factory через `DATABASE_URL`.
+- Добавлена idempotent history repository с `ON CONFLICT`.
+- Добавлен migration helper для новой таблицы.
+- Добавлен Athlete History service с безопасным file-state fallback.
+- Добавлены backend contract tests для athlete scoping и database unavailable behavior.
+
+### Safety
+- PostgreSQL adapter пока не подключён к production database автоматически.
+- При отсутствии `DATABASE_URL` repository не пытается писать в БД.
+- Fallback read ограничен текущим Actor и не смешивает пользователей.
+- Passkey/gymsid authentication не изменялись.
+- Production `/opt/opengym` не изменялся.
+
+### Verification
+- Backend tests: 19 passed, 0 failed.
+- Frontend tests: 24 passed, 0 failed.
+- Frontend production build: passed.
+- Node syntax check: passed.
+- `git diff --check`: passed.
+
+### Limitation
+- Полное подключение history API к runtime будет отдельным этапом после настройки миграции и проверки PostgreSQL-контейнера.
+
 ## [0.21.0] - 2026-08-27
 
 ### Added
