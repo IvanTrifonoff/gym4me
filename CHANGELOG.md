@@ -2,6 +2,31 @@
 
 Все заметные изменения проекта фиксируются здесь. Версии используют [Semantic Versioning](https://semver.org/): `MAJOR.MINOR.PATCH`.
 
+## [0.5.0] - 2026-08-27
+
+### Added
+- Athlete frontend подключён к `/api/v1/athlete/state` через общий fetch API client.
+- Добавлен Zustand store спортсмена с безопасными defaults, загрузкой, сохранением и состоянием ошибок.
+- Настройки единиц веса, темы, языка, звуков и удержания экрана теперь сохраняются через Athlete API.
+- Сохранены единый `PwaShell`, общие PWA-токены и athlete-only границы состояния.
+- Добавлены contract tests для загрузки, сохранения и offline/error-сценария.
+
+### Security and compatibility
+- API requests используют `credentials: include`, поэтому legacy `gymsid` и passkey flow не заменяются.
+- Frontend не хранит passkey, session secret или чужой athlete state.
+- Trainer/Gym domains не получают доступа к Athlete store.
+- Production `/opt/opengym` не изменялся.
+
+### Verification
+- Backend tests: 12 passed, 0 failed.
+- Frontend Vitest: 4 passed, 0 failed.
+- Frontend production build: passed.
+- Node syntax check: passed.
+- `git diff --check`: passed.
+
+### Limitations
+- Реальные legacy-экраны Plan, Workout, Stats, History, Library и Notifications ещё переносятся отдельными срезами; пока они показывают migration placeholder.
+
 ## [0.4.2] - 2026-08-27
 
 ### Maintenance
