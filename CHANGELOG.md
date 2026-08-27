@@ -1,3 +1,21 @@
+## [0.31.0] - 2026-08-27
+
+### Added
+- Добавлена отдельная PostgreSQL schema .
+- Добавлен Actor-scoped bodyweight repository с upsert по спортсмену и дате.
+- Добавлены API routes .
+- При отключённом feature flag сохраняется безопасный fallback через Athlete state.
+- Добавлены проверки валидации и изоляции athlete parameters.
+
+### Verification
+- Backend container tests: 22 passed, 1 skipped without TEST_DATABASE_URL.
+- Frontend tests: 35 passed.
+- Frontend production build: passed.
+- API health: 200.
+- Bodyweight endpoint without auth: 401.
+- Preview HTTPS and PWA resources: passed.
+- git diff --check: passed.
+
 ## [0.30.0] - 2026-08-27
 
 ### Added
