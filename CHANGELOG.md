@@ -2,6 +2,35 @@
 
 Все заметные изменения проекта фиксируются здесь. Версии используют [Semantic Versioning](https://semver.org/): `MAJOR.MINOR.PATCH`.
 
+## [0.10.0] - 2026-08-27
+
+### Added
+- Добавлен Workout logging слой для режима `reps`.
+- Добавлена валидация веса и повторений.
+- Добавлена поддержка логирования timed sets.
+- Добавлена поддержка cardio sets с длительностью и скоростью.
+- Добавлены progress helpers: total, done и percent.
+- Добавлена сериализация завершённых подходов в history entry.
+- Незавершённые и служебные поля не попадают в history output.
+
+### Architecture
+- Logging helpers отделены от Workout UI и store.
+- Все изменения выполняются внутри Athlete Workout domain.
+- Trainer/Gym domains не получают прямой доступ к workout internals.
+
+### Security and compatibility
+- Неактивная тренировка не принимает новые записи.
+- Невалидные значения веса, повторений, времени и cardio отклоняются.
+- Passkey, `gymsid`, Athlete API и PWA shell не изменялись.
+- Production `/opt/opengym` не изменялся.
+
+### Verification
+- Backend tests: 12 passed, 0 failed.
+- Frontend tests: 13 passed, 0 failed.
+- Frontend production build: passed.
+- Node syntax check: passed.
+- `git diff --check`: passed.
+
 ## [0.9.0] - 2026-08-27
 
 ### Added
