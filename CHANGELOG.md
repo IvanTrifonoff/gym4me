@@ -2,6 +2,26 @@
 
 Все заметные изменения проекта фиксируются здесь. Версии используют [Semantic Versioning](https://semver.org/): `MAJOR.MINOR.PATCH`.
 
+## [0.4.1] - 2026-08-27
+
+### Process and stack
+- Уточнено, что Python, pip и pytest не входят в исходный код, runtime, сборку, тесты или миграции `gym4me`.
+- Quality-gate усилен проверкой отсутствия Python-проектных файлов в Git.
+- Сохранён исходный стек Node.js 22 + React 19 + Vite 8 + PostgreSQL + WebAuthn/Web Push + Capacitor.
+- Служебные Python-команды, использованные только для передачи файлов на сервер, не являются частью репозитория и не требуются разработчикам проекта.
+
+### Verification
+- Backend tests: 12 passed, 0 failed.
+- Frontend build: passed.
+- Frontend Vitest: 1 passed, 0 failed.
+- Node syntax check: passed.
+- Release verification: passed.
+- `git diff --check`: passed.
+
+### Compatibility
+- Production `/opt/opengym` не изменялся.
+- Passkey, `gymsid`, legacy adapter и PWA-контракты не изменялись.
+
 ## [0.4.0] - 2026-08-27
 
 ### Added

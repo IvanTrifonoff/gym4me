@@ -9,6 +9,7 @@ for (const file of ['package.json', 'api/package.json', 'frontend/package.json']
 const changelog = fs.readFileSync('CHANGELOG.md', 'utf8');
 if (!changelog.includes(`## [${version}]`)) throw new Error(`CHANGELOG missing ${version}`);
 let tracked = [];
-try { tracked = execFileSync('git', ['ls-files'], { encoding: 'utf8' }).split('\n'); } catch { console.warn('git unavailable; secret tracking check must run on the host'); }
+try { tracked = execFileSync('git', ['ls-files'], { encoding: 'utf8' }).split('\n'); } catch { console.warn('git unavailable; secret tracking check must run on host'); }
 for (const forbidden of ['data/secret', 'data/vapid.json', 'data/db.json']) if (tracked.includes(forbidden)) throw new Error(`Runtime secret/data tracked: ${forbidden}`);
+for (const file of tracked) if (/\.(py|pyc)$|(^|\/)(requirements|pyproject|Pipfile)/i.test(file)) throw new Error(`Non-Node project file tracked: ${file}`);
 console.log(`release verification passed: ${version}`);

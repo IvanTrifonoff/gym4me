@@ -1,6 +1,6 @@
 # openGym Next: исходный стек
 
-Новая структура сохраняет стек работающего openGym, чтобы разработчикам не приходилось осваивать другой runtime.
+Новая структура сохраняет стек работающего openGym. Приложение, сборка, тесты и миграции выполняются на исходном Node.js/React стеке.
 
 ## Backend
 
@@ -22,17 +22,10 @@
 - Capacitor 7 для iOS/Android;
 - существующий PWA service worker.
 
-## Правило
+## Жёсткое правило
 
-Не добавлять Python, другой backend runtime, новый frontend framework или новую state-management библиотеку без отдельного архитектурного решения. Служебные скрипты миграции могут быть написаны на любом удобном языке, но не являются частью приложения.
+Python, pip, pytest и Python runtime не являются частью приложения, сборки, тестов или миграций `gym4me`. Новые зависимости и инструменты добавляются только после архитектурного решения и должны сохранять исходный Node.js + React + Vite + PostgreSQL + WebAuthn/Web Push стек.
 
 ## Совместимость
 
-На время миграции сохраняются:
-
-- cookies `gymsid` и `adminsid`;
-- production RP ID и origin из окружения;
-- формат WebAuthn credential DTO;
-- push VAPID/Web Push;
-- Capacitor mobile build;
-- общая PWA design system.
+На время миграции сохраняются cookies `gymsid` и `adminsid`, production RP ID/origin из окружения, WebAuthn credential DTO, push VAPID/Web Push, Capacitor mobile build и общая PWA design system.
