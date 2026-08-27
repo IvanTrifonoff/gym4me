@@ -1,10 +1,33 @@
 import http from 'node:http';
+import { runtimeConfig } from './config/runtime.js';
+import { sendJson } from './http/json-response.js';
+import { resolveRequestActor } from './auth/actor-resolver.js';
+import { AthleteStateFileRepository } from './domains/athlete/athlete-state.repository.js';
+import { AthleteRepository } from './domains/athlete/athlete.repository.js';
+import { AthleteService } from './domains/athlete/athlete.service.js';
 
-const port = Number(process.env.PORT || 3100);
+const config = runtimeConfig();
+const stateRepository = new AthleteStateFileRepository(config.dataDir);
+const repository = new AthleteRepository({ stateRepository });
+const service = new AthleteService(repository);
 
-const server = http.createServer((_req, res) => {
-  res.writeHead(200, { 'content-type': 'application/json', 'cache-control': 'no-store' });
-  res.end(JSON.stringify({ ok: true, service: 'opengym-next', status: 'skeleton' }));
+function pathname(req) { return new URL(req.url, `http://${req.headers.host || 'localhost'}`).pathname; }
+async function readJson(req) {
+  let body = ''; for await (const chunk of req) body += chunk;
+  if (!body) return {};
+  try { return JSON.parse(body); } catch { throw Object.assign(new Error('invalid JSON'), { status: 400 }); }
+}
+
+const server = http.createServer(async (req, res) => {
+  try {
+    if (req.method === 'GET' && pathname(req) === '/api/health') return sendJson(res, 200, { ok: true, service: 'opengym-next' });
+    const actor = resolveRequestActor(req, { secret: config.sessionSecret });
+    if (!actor) return sendJson(res, 401, { error: 'authentication required' });
+    if (req.method === 'GET' && pathname(req) === '/api/v1/athlete/state') return sendJson(res, 200, { data: await service.getState(actor) });
+    if (req.method === 'PUT' && pathname(req) === '/api/v1/athlete/state') return sendJson(res, 200, { data: await service.saveState(actor, actor.id, await readJson(req)) });
+    return sendJson(res, 404, { error: 'not found' });
+  } catch (error) { sendJson(res, error.status || 500, { error: error.message || 'internal error' }); }
 });
 
-server.listen(port, () => console.log(`opengym-next api on :${port}`));
+if (process.env.NODE_ENV !== 'test') server.listen(config.port, () => console.log(`opengym-next api on :${config.port}`));
+export { server, service };
