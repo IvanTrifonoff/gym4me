@@ -2,6 +2,37 @@
 
 Все заметные изменения проекта фиксируются здесь. Версии используют [Semantic Versioning](https://semver.org/): `MAJOR.MINOR.PATCH`.
 
+## [0.8.0] - 2026-08-27
+
+### Added
+- Добавлен изолированный Athlete Workout model/state machine.
+- Поддержаны режимы `reps`, `time` и `cardio`.
+- Добавлены статусы `idle`, `active`, `completed`, `discarded`.
+- Добавлены нормализация workout entries, подсчёт подходов и completed sets.
+- Добавлены безопасные переходы finish/discard и запрет изменения завершённой тренировки.
+- Добавлено переключение done для подходов только активной тренировки.
+
+### Architecture
+- Workout module находится в `frontend/src/domains/athlete/workout`.
+- Модель не импортирует Trainer/Gym state и не зависит от legacy store.
+- Публичные функции отделены от UI и пригодны для последующего backend adapter.
+
+### Compatibility and security
+- Existing passkey, `gymsid`, Athlete API и PWA shell не изменялись.
+- Данные workout остаются внутри текущего Athlete state.
+- Нельзя завершить пустую тренировку или изменить неактивную.
+- Production `/opt/opengym` не изменялся.
+
+### Verification
+- Backend tests: 12 passed, 0 failed.
+- Frontend tests: 9 passed, 0 failed.
+- Frontend production build: passed.
+- Node syntax check: passed.
+- `git diff --check`: passed.
+
+### Next
+- Следующий срез подключит создание Workout из Plan и реальный logging подходов.
+
 ## [0.7.0] - 2026-08-27
 
 ### Added
