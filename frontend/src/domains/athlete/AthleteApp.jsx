@@ -1,9 +1,54 @@
 import { useEffect, useState } from 'react';
 import PwaShell from '../../shared/components/PwaShell.jsx';
 import { useAthleteStore } from './athlete-store.js';
+import { Plan } from './plan/Plan.jsx';
 
-export const sections = [['home', 'Главная'], ['plan', 'План'], ['workout', 'Тренировка'], ['stats', 'Статистика'], ['history', 'История'], ['library', 'Библиотека'], ['settings', 'Настройки'], ['notifications', 'Уведомления']];
-function Home({ onSelect }) { return <><h1>Мой прогресс</h1><section className="pwa-card athlete-hero"><strong>Сегодняшняя тренировка</strong><p>Выберите план и начните занятие.</p><button onClick={() => onSelect('plan')}>Открыть план</button></section></>; }
-function Settings() { const { state, loading, saving, error, load, update } = useAthleteStore(); useEffect(() => { load(); }, [load]); const change = key => event => update({ [key]: event.target.value }); return <><h1>Настройки</h1>{loading && <p className="pwa-muted">Загрузка настроек…</p>}{error && <p role="alert">Не удалось сохранить настройки. Повторите попытку.</p>}<section className="pwa-card settings-list">{[['unit','Единицы веса'],['theme','Тема'],['lang','Язык']].map(([key,label]) => <label key={key}>{label}<select value={String(state[key])} onChange={change(key)} disabled={saving}>{key === 'unit' && <><option value="kg">кг</option><option value="lb">фунты</option></>}{key === 'theme' && <><option value="dark">Тёмная</option><option value="light">Светлая</option></>}{key === 'lang' && <><option value="ru">Русский</option><option value="en">English</option></>}</select></label>)}{[['sound','Звуки'],['keepAwake','Не выключать экран']].map(([key,label]) => <label key={key}>{label}<input type="checkbox" checked={Boolean(state[key])} onChange={e => update({ [key]: e.target.checked })} disabled={saving} /></label>)}</section></>; }
-function Placeholder({ title }) { return <><h1>{title}</h1><section className="pwa-card athlete-placeholder"><p>Раздел переносится поэтапно. Данные остаются в legacy-контуре до завершения миграции.</p></section></>; }
-export function AthleteApp() { const [active, setActive] = useState('home'); const title = sections.find(([id]) => id === active)?.[1] || 'Athlete'; return <PwaShell tabbar={<nav className="athlete-tabs">{sections.map(([id,label]) => <button className={active === id ? 'active' : ''} key={id} onClick={() => setActive(id)} aria-label={label}>{label}</button>)}</nav>}><div className="athlete-header"><span className="pwa-eyebrow">ATHLETE</span><span className="pwa-section-title">{title}</span></div>{active === 'home' ? <Home onSelect={setActive} /> : active === 'settings' ? <Settings /> : <Placeholder title={title} />}</PwaShell>; }
+export const sections = [
+  ['home', 'Главная'], ['plan', 'План'], ['workout', 'Тренировка'], ['stats', 'Статистика'],
+  ['history', 'История'], ['library', 'Библиотека'], ['settings', 'Настройки'], ['notifications', 'Уведомления']
+];
+
+function Home({ onSelect }) {
+  return <><h1>Мой прогресс</h1><section className="pwa-card athlete-hero">
+    <strong>Сегодняшняя тренировка</strong><p>Выберите план и начните занятие.</p>
+    <button className="pwa-button" onClick={() => onSelect('plan')}>Открыть план</button>
+  </section></>;
+}
+
+function Settings() {
+  const { state, loading, saving, error, load, update } = useAthleteStore();
+  useEffect(() => { load(); }, [load]);
+  const change = key => event => update({ [key]: event.target.type === 'checkbox' ? event.target.checked : event.target.value });
+  return <><h1>Настройки</h1>{loading && <p className="pwa-muted">Загрузка настроек…</p>}
+    {error && <p role="alert">Не удалось сохранить настройки. Повторите попытку.</p>}
+    <section className="pwa-card settings-list">
+      {[['unit', 'Единицы веса'], ['theme', 'Тема'], ['lang', 'Язык']].map(([key, label]) => <label key={key}>{label}
+        <select value={String(state[key])} onChange={change(key)} disabled={saving}>
+          {key === 'unit' && <><option value="kg">кг</option><option value="lb">фунты</option></>}
+          {key === 'theme' && <><option value="dark">Тёмная</option><option value="light">Светлая</option></>}
+          {key === 'lang' && <><option value="ru">Русский</option><option value="en">English</option></>}
+        </select>
+      </label>)}
+      {[['sound', 'Звуки'], ['keepAwake', 'Не выключать экран']].map(([key, label]) => <label key={key}>{label}
+        <input type="checkbox" checked={Boolean(state[key])} onChange={change(key)} disabled={saving} />
+      </label>)}
+    </section>
+  </>;
+}
+
+function Placeholder({ title }) {
+  return <><h1>{title}</h1><section className="pwa-card athlete-placeholder">
+    <p>Раздел переносится поэтапно. Данные остаются в legacy-контуре до завершения миграции.</p>
+  </section></>;
+}
+
+export function AthleteApp() {
+  const [active, setActive] = useState('home');
+  const title = sections.find(([id]) => id === active)?.[1] || 'Athlete';
+  return <PwaShell tabbar={<nav className="athlete-tabs">
+    {sections.map(([id, label]) => <button className={active === id ? 'active' : ''} key={id} onClick={() => setActive(id)} aria-label={label}>{label}</button>)}
+  </nav>}>
+    <div className="athlete-header"><span className="pwa-eyebrow">ATHLETE</span><span className="pwa-section-title">{title}</span></div>
+    {active === 'home' ? <Home onSelect={setActive} /> : active === 'plan' ? <Plan /> : active === 'settings' ? <Settings /> : <Placeholder title={title} />}
+  </PwaShell>;
+}

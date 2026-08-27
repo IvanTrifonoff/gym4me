@@ -2,6 +2,37 @@
 
 Все заметные изменения проекта фиксируются здесь. Версии используют [Semantic Versioning](https://semver.org/): `MAJOR.MINOR.PATCH`.
 
+## [0.6.0] - 2026-08-27
+
+### Added
+- Перенесён первый рабочий Athlete Plan module в `frontend/src/domains/athlete/plan`.
+- Добавлено недельное расписание с семью днями и состояниями тренировка/отдых.
+- Добавлено отображение пользовательских routines и количества упражнений.
+- Добавлены создание routine и starter Push/Pull/Legs plan через Athlete state API.
+- Plan работает через Zustand Athlete store, не импортирует Trainer/Gym state или legacy store.
+- Добавлены модель Plan, view-model helpers и contract tests.
+
+### UI
+- Сохранён единый PWA shell и мобильный tabbar.
+- Сохранены safe-area, dark surface, accent и reduced-motion правила.
+- UI остаётся в русском языке текущего Athlete-контра.
+
+### Compatibility and security
+- Passkey, `gymsid`, legacy adapter и backend auth не изменялись.
+- Plan изменяет только состояние текущего спортсмена через `/api/v1/athlete/state`.
+- Чужие routines и state недоступны через Athlete policy.
+- Production `/opt/opengym` не изменялся.
+
+### Verification
+- Backend tests: 12 passed, 0 failed.
+- Frontend tests: 6 passed, 0 failed.
+- Frontend production build: passed.
+- Node syntax check: passed.
+- `git diff --check`: passed.
+
+### Limitations
+- Редактор отдельных упражнений, GIF-инструкции, переводы названий, Workout, Stats, History, Library и Notifications переносятся следующими Ralph-срезами.
+
 ## [0.5.0] - 2026-08-27
 
 ### Added

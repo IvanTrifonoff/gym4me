@@ -1,0 +1,3 @@
+import { describe, expect, it } from 'vitest';
+import { assignedRoutine, createStarterPlan, routineCount, weekDays } from './plan-model.js';
+describe('Athlete Plan model', () => { it('maps weekly assignments without leaking other domains', () => { const state = { week: { 1: 'r1' }, routines: [{ id: 'r1', name: 'Пуш' }] }; expect(assignedRoutine(state, '1').name).toBe('Пуш'); expect(assignedRoutine(state, '2')).toBeNull(); expect(routineCount(state)).toBe(1); }); it('provides all week days and starter routines', () => { expect(weekDays).toHaveLength(7); expect(createStarterPlan().map(r => r.id)).toEqual(['starter-push','starter-pull','starter-legs']); }); });
