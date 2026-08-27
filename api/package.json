@@ -1,0 +1,6 @@
+{
+  "name": "opengym-next-api",
+  "private": true,
+  "type": "module",
+  "scripts": {"test": "node --test", "start": "node src/main.js"}
+}
