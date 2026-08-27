@@ -2,6 +2,20 @@
 
 Все заметные изменения проекта фиксируются здесь. Версии используют [Semantic Versioning](https://semver.org/): `MAJOR.MINOR.PATCH`.
 
+## [0.4.2] - 2026-08-27
+
+### Maintenance
+- Синхронизирована версия frontend `package-lock.json` с канонической версией проекта.
+- Устранены остаточные незакоммиченные изменения после установки зависимостей quality-gate.
+
+### Verification
+- Backend tests: 12 passed, 0 failed.
+- Frontend build: passed.
+- Frontend Vitest: 1 passed, 0 failed.
+- Release verification: passed.
+- Node syntax check: passed.
+- `git diff --check`: passed.
+
 ## [0.4.1] - 2026-08-27
 
 ### Process and stack
