@@ -2,6 +2,34 @@
 
 Все заметные изменения проекта фиксируются здесь. Версии используют [Semantic Versioning](https://semver.org/): `MAJOR.MINOR.PATCH`.
 
+## [0.14.0] - 2026-08-27
+
+### Added
+- Перенесён Athlete Stats module на основе завершённых workout history entries.
+- Добавлены агрегаты тренировок, подходов, объёма и активных дней.
+- Добавлена статистика по каждому упражнению и максимальному весу.
+- Добавлен расчёт последовательных дней тренировок.
+- Stats подключён к единому Athlete PWA navigation.
+
+### Architecture
+- Stats model отделён от UI и не зависит от Trainer/Gym domains.
+- History и Stats используют только Athlete-owned state.
+- UI не получает passkey, session data или внутренние auth-поля.
+
+### Compatibility
+- Сохранены Node.js/React/Vite/Zustand стек, `gymsid`, passkey и PWA shell.
+- Production `/opt/opengym` не изменялся.
+
+### Verification
+- Backend tests: 12 passed, 0 failed.
+- Frontend tests: 18 passed, 0 failed.
+- Frontend production build: passed.
+- Node syntax check: passed.
+- `git diff --check`: passed.
+
+### Limitations
+- Расширенные legacy-графики, muscle balance, RIR/RPE и bodyweight charts будут переноситься отдельными Stats-срезами.
+
 ## [0.13.0] - 2026-08-27
 
 ### Added
