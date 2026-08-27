@@ -1,0 +1,5 @@
+import { describe, expect, it, vi } from 'vitest';
+import { mergeHistory, syncWorkout } from './history-sync.js';
+vi.mock('../../../shared/api/client.js', () => ({ apiRequest: vi.fn() }));
+import { apiRequest } from '../../../shared/api/client.js';
+describe('Athlete history sync', () => { it('uses workout id for idempotent API write and reports success', async () => { apiRequest.mockResolvedValue({ id: 'w1' }); const result = await syncWorkout({ id: 'w1', name: 'Сила' }); expect(result.ok).toBe(true); expect(apiRequest).toHaveBeenCalledWith('/api/v1/athlete/history', expect.objectContaining({ method: 'POST' })); }); it('keeps pending workout on network failure', async () => { apiRequest.mockRejectedValue(new Error('offline')); const workout = { id: 'w2', name: 'Кардио' }; const result = await syncWorkout(workout); expect(result.ok).toBe(false); expect(result.pending).toEqual(workout); }); it('merges local and remote entries by id', () => { expect(mergeHistory([{ id: 'w1', name: 'old' }], [{ id: 'w1', name: 'new' }, { id: 'w2' }])).toHaveLength(2); }); });

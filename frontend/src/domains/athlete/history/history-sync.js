@@ -1,0 +1,3 @@
+import { apiRequest } from '../../../shared/api/client.js';
+export async function syncWorkout(workout) { if (!workout?.id) throw new Error('workout id required'); try { const saved = await apiRequest('/api/v1/athlete/history', { method: 'POST', body: JSON.stringify(workout) }); return { ok: true, synced: saved || workout }; } catch (error) { return { ok: false, pending: workout, error }; } }
+export function mergeHistory(local = [], remote = []) { const byId = new Map([...local, ...remote].filter(item => item?.id).map(item => [String(item.id), item])); return [...byId.values()].sort((a, b) => String(a.d || '').localeCompare(String(b.d || ''))); }

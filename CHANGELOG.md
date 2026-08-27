@@ -2,6 +2,29 @@
 
 Все заметные изменения проекта фиксируются здесь. Версии используют [Semantic Versioning](https://semver.org/): `MAJOR.MINOR.PATCH`.
 
+## [0.25.0] - 2026-08-27
+
+### Added
+- Добавлен Athlete history write-through adapter.
+- Завершённая тренировка отправляется через `POST /api/v1/athlete/history`.
+- Workout id используется как idempotency key на PostgreSQL repository.
+- При offline/API ошибке локальная история сохраняется в Athlete state.
+- Добавлен merge helper для локальной и серверной истории.
+- Добавлены contract tests success/failure/merge сценариев.
+
+### Compatibility and security
+- Сохранены `gymsid`, passkey, Actor policy и единый PWA shell.
+- Workout history не отправляется от имени другого athlete.
+- Credentials и auth secrets не попадают в history payload.
+- Production `/opt/opengym` и production database не изменялись.
+
+### Verification
+- Backend tests: 21 total, 20 passed, 1 skipped without TEST_DATABASE_URL.
+- Frontend tests: 27 passed, 0 failed.
+- Frontend production build: passed.
+- Node syntax check: passed.
+- `git diff --check`: passed.
+
 ## [0.24.0] - 2026-08-27
 
 ### Added
