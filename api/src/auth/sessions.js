@@ -25,5 +25,19 @@ export function parseSession(token, secret, now = Date.now()) {
   if (!payload) return null;
   const [actorType, actorId, expiresAt, version] = payload.split(':');
   if (!actorType || !actorId || !Number.isFinite(Number(expiresAt)) || Number(expiresAt) <= now) return null;
+  if (!Number.isInteger(Number(version || 0))) return null;
   return { actorType, actorId, expiresAt: Number(expiresAt), version: Number(version || 0) };
+}
+
+// Legacy production athlete cookie format: <userId>:<expiry>:<sessionVersion>.<hmac>.
+// Keep this parser separate from the new actor session format during migration.
+export function parseLegacyAthleteSession(token, secret, { now = Date.now(), sessionVersion = null } = {}) {
+  const payload = verifySession(token, secret);
+  if (!payload) return null;
+  const [actorId, expiresAt, version] = payload.split(':');
+  if (!actorId || !Number.isFinite(Number(expiresAt)) || Number(expiresAt) <= now) return null;
+  const claimed = version === undefined ? 0 : Number(version);
+  if (!Number.isInteger(claimed)) return null;
+  if (sessionVersion !== null && claimed !== Number(sessionVersion)) return null;
+  return { actorId, expiresAt: Number(expiresAt), version: claimed };
 }

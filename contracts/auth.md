@@ -1,44 +1,23 @@
 # Authentication contract v1
 
-## Existing production compatibility
+## Production compatibility
 
 The legacy application uses:
 
 - `gymsid` for athlete sessions;
 - `adminsid` for staff/admin sessions;
-- signed HMAC-SHA256 cookies;
-- WebAuthn passkeys;
-- RP ID `gym.trfnv.ru` and origin `https://gym.trfnv.ru`.
+- HMAC-SHA256 signed cookies;
+- WebAuthn passkeys through `@simplewebauthn/server`;
+- RP ID and origin from environment (`RP_ID`, `ORIGIN`).
 
-The new project must not copy production secrets. It receives a secret through environment/secret storage and uses a legacy adapter only during migration.
+The legacy athlete payload is `<userId>:<expiry>:<sessionVersion>.<hmac>`. The new auth boundary parses this format through `legacy-adapter.js` while the new Actor format is introduced separately.
 
 ## Rules
 
-1. Passkey credentials remain server-side; the browser stores only the authenticator credential.
-2. Private keys, raw session secrets and production database dumps never enter Git.
-3. Every session resolves to an explicit `Actor`.
+1. Passkey credentials remain server-side.
+2. Private keys, session secrets and production dumps never enter Git.
+3. Every request resolves to an explicit Actor.
 4. Athlete state is accessible only to the same athlete actor or a policy-approved trainer DTO.
-5. Session version/revocation remains supported through `logout all`.
-6. RP ID and origin are configuration, never hardcoded in domain code.
-7. Migration must preserve old cookies until the cutover is explicitly completed.
-
-## Actor shape
-
-```json
-{
-  "type": "athlete",
-  "id": "athlete_01"
-}
-```
-
-Staff actor:
-
-```json
-{
-  "type": "staff",
-  "id": "trainer_01",
-  "role": "trainer",
-  "organizationId": "gym_01",
-  "branchIds": ["branch_01"]
-}
-```
+5. `logout all` and session versions remain supported.
+6. RP ID/origin are configuration, never hardcoded in domain code.
+7. Legacy cookies remain valid until the cutover is explicitly completed.

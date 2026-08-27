@@ -1,6 +1,16 @@
 {
-  "name": "opengym-next-api",
+  "name": "gym-api",
+  "version": "1.2.4",
   "private": true,
   "type": "module",
-  "scripts": {"test": "node --test", "start": "node src/main.js"}
+  "main": "server.js",
+  "license": "AGPL-3.0-or-later",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@simplewebauthn/server": "^13.1.1",
+    "pg": "^8.23.0",
+    "web-push": "^3.6.7"
+  }
 }

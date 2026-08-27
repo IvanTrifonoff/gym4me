@@ -1,0 +1,10 @@
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import App from './app/App.jsx';
+import './shared/styles/pwa.css';
+
+createRoot(document.getElementById('root')).render(<StrictMode><App /></StrictMode>);
+
+if ('serviceWorker' in navigator && location.protocol === 'https:') {
+  navigator.serviceWorker.register('/sw.js').catch(() => {});
+}
