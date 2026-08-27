@@ -2,6 +2,32 @@
 
 Все заметные изменения проекта фиксируются здесь. Версии используют [Semantic Versioning](https://semver.org/): `MAJOR.MINOR.PATCH`.
 
+## [0.9.0] - 2026-08-27
+
+### Added
+- Добавлен Athlete Workout builder для запуска тренировки из routine.
+- Добавлен freestyle workout без обязательной программы.
+- Добавлено построение sets для режимов reps, time и cardio.
+- Добавлено безопасное добавление упражнения только в активную тренировку.
+- Сохранён legacy-compatible формат `active` с `routineId`, `entries`, `cur` и `start`.
+
+### Architecture
+- Builder отделён от UI и state store.
+- Workout creation не зависит от Trainer/Gym domains.
+- Все проверки активного статуса выполняются внутри Workout module.
+
+### Compatibility and security
+- Passkey, `gymsid`, Athlete API и PWA shell не изменялись.
+- Неактивная или завершённая тренировка не принимает новые упражнения.
+- Production `/opt/opengym` не изменялся.
+
+### Verification
+- Backend tests: 12 passed, 0 failed.
+- Frontend tests: 11 passed, 0 failed.
+- Frontend production build: passed.
+- Node syntax check: passed.
+- `git diff --check`: passed.
+
 ## [0.8.0] - 2026-08-27
 
 ### Added
