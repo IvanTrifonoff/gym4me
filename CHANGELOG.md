@@ -1,3 +1,20 @@
+## [0.39.0] - 2026-08-27
+
+### Added
+- Добавлен ручной action  для bodyweight журнала.
+- Добавлен видимый online/offline статус синхронизации.
+- Server-preferred merge сохраняет локальные offline-точки и устраняет конфликты по дате.
+- Существующий fallback сохраняется при недоступности API.
+
+### Verification
+- Frontend tests: 42 passed.
+- Frontend production build: passed.
+- Backend tests: 22 passed, 2 skipped.
+- API health: 200.
+- Bodyweight endpoint without auth: 401.
+- Preview HTTPS/PWA smoke: passed.
+- git diff --check: passed.
+
 ## [0.38.0] - 2026-08-27
 
 ### Added

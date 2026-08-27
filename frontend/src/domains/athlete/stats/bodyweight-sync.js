@@ -7,13 +7,17 @@ export function mergeBodyweight(local, remote) {
   return [...byDate.values()].sort((a, b) => a.d.localeCompare(b.d));
 }
 
-export async function loadBodyweight(state) {
+export async function syncBodyweight(state) {
   try {
     const remote = await apiRequest('/api/v1/athlete/bodyweight');
-    return Array.isArray(remote) ? mergeBodyweight(state?.bodyweight, remote) : bodyweightPoints(state);
+    return { points: Array.isArray(remote) ? mergeBodyweight(state?.bodyweight, remote) : bodyweightPoints(state), online: true };
   } catch {
-    return bodyweightPoints(state);
+    return { points: bodyweightPoints(state), online: false };
   }
+}
+
+export async function loadBodyweight(state) {
+  return (await syncBodyweight(state)).points;
 }
 
 export async function saveBodyweight(state, point, update) {
