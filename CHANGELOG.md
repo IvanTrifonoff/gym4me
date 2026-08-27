@@ -2,6 +2,33 @@
 
 Все заметные изменения проекта фиксируются здесь. Версии используют [Semantic Versioning](https://semver.org/): `MAJOR.MINOR.PATCH`.
 
+## [0.16.0] - 2026-08-27
+
+### Added
+- Перенесён полный legacy exercise catalog в отдельный Athlete asset.
+- Перенесено 1324 упражнения и русский dictionary из legacy.
+- Каталог загружается отдельным динамическим import и не входит в initial module.
+- Сохранён перевод `0027` как «Тяга штанги в наклоне».
+- Русские названия нормализуются с корректной заглавной буквы.
+- Сохранена изоляция custom exercises конкретного спортсмена.
+- Добавлены тесты размера полного каталога, перевода и customEx isolation.
+
+### Performance
+- Initial Athlete bundle не загружает полный ~937 KB catalog.
+- GIF и инструкции по-прежнему загружаются только в detail flow.
+
+### Compatibility and security
+- Сохранены Node.js/React/Vite/Zustand, passkey, `gymsid` и PWA shell.
+- Данные каталога read-only; пользовательский контент не смешивается с глобальным catalog.
+- Production `/opt/opengym` не изменялся.
+
+### Verification
+- Backend tests: 12 passed, 0 failed.
+- Frontend tests: 22 passed, 0 failed.
+- Frontend production build: passed.
+- Node syntax check: passed.
+- `git diff --check`: passed.
+
 ## [0.15.0] - 2026-08-27
 
 ### Added
