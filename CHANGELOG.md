@@ -2,6 +2,33 @@
 
 Все заметные изменения проекта фиксируются здесь. Версии используют [Semantic Versioning](https://semver.org/): `MAJOR.MINOR.PATCH`.
 
+## [0.13.0] - 2026-08-27
+
+### Added
+- Перенесён Athlete History module в новую модульную структуру.
+- Добавлена нормализация legacy workout entries.
+- Добавлена обратная хронологическая выдача тренировок.
+- Добавлена фильтрация истории по названию и дате.
+- Добавлен detail view с выполненными подходами.
+- История подключена к Athlete state/API через единый PWA shell.
+
+### Architecture
+- History model отделён от UI.
+- Незавершённые подходы не отображаются как завершённые.
+- Модуль не зависит от Trainer/Gym domains.
+
+### Compatibility and security
+- Сохранены Node.js/React/Vite, `gymsid`, passkey и Athlete store.
+- История не содержит credentials или служебных auth-полей.
+- Production `/opt/opengym` не изменялся.
+
+### Verification
+- Backend tests: 12 passed, 0 failed.
+- Frontend tests: 17 passed, 0 failed.
+- Frontend production build: passed.
+- Node syntax check: passed.
+- `git diff --check`: passed.
+
 ## [0.12.0] - 2026-08-27
 
 ### Added
