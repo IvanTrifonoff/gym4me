@@ -2,6 +2,27 @@
 
 Все заметные изменения проекта фиксируются здесь. Версии используют [Semantic Versioning](https://semver.org/): `MAJOR.MINOR.PATCH`.
 
+## [0.20.0] - 2026-08-27
+
+### Added
+- Добавлен HTTP smoke-test нового Athlete API.
+- `/api/health` проверяется как публичный endpoint.
+- Athlete endpoints проверяются на обязательную авторизацию и корректный `401`.
+- API получил `createServer()` factory, чтобы тесты не связывали production-порт при импорте.
+- Запуск listener теперь выполняется только через явный `GYM4ME_START_SERVER=1`.
+
+### Compatibility and security
+- Legacy `gymsid`, Actor resolver и passkey contract сохранены.
+- HTTP smoke flow не использует production secrets и production database.
+- Production `/opt/opengym` не запускался и не изменялся.
+
+### Verification
+- HTTP/API backend tests: 15 passed, 0 failed.
+- Frontend tests: 24 passed, 0 failed.
+- Frontend production build: passed.
+- Node syntax check: passed.
+- `git diff --check`: passed.
+
 ## [0.19.0] - 2026-08-27
 
 ### Added
