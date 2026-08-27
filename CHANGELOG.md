@@ -2,6 +2,30 @@
 
 Все заметные изменения проекта фиксируются здесь. Версии используют [Semantic Versioning](https://semver.org/): `MAJOR.MINOR.PATCH`.
 
+## [0.24.0] - 2026-08-27
+
+### Added
+- Добавлены Athlete History API routes: `GET/POST /api/v1/athlete/history`.
+- History routes используют Actor-scoped service и optional PostgreSQL repository.
+- При недоступной БД frontend показывает локальную Athlete history без падения интерфейса.
+- Добавлены HTTP auth tests для history endpoints.
+- Новый API composition остаётся Node-only и testable через `createServer()`.
+
+### Security and compatibility
+- Все history операции привязаны к текущему `gymsid` Actor.
+- Неавторизованные запросы получают `401`.
+- Production database и `/opt/opengym` не затрагивались.
+- Passkey, legacy cookies и PWA shell сохранены.
+
+### Verification
+- Backend tests: 20 passed, 1 skipped without TEST_DATABASE_URL.
+- Frontend tests: 24 passed, 0 failed.
+- Frontend production build: passed.
+- Container API image build: passed.
+- Container API tests: passed.
+- Container smoke: API 200, frontend 200.
+- `git diff --check`: passed.
+
 ## [0.23.0] - 2026-08-27
 
 ### Added
