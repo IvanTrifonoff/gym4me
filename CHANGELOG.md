@@ -1,3 +1,19 @@
+## [0.30.0] - 2026-08-27
+
+### Added
+- Добавлена bodyweight analytics model с периодной фильтрацией.
+- Добавлена SVG polyline-визуализация динамики веса без новых зависимостей.
+- Stats показывает последний вес, изменение, среднее и диапазон дат.
+- Сохранён lazy каталог упражнений и единый PWA стиль.
+
+### Verification
+- Frontend tests: 35 passed.
+- Frontend production build: passed.
+- Backend container tests: 20 passed, 1 skipped without TEST_DATABASE_URL.
+- Preview API health: 200.
+- Preview HTTPS and PWA manifest: passed.
+- git diff --check: passed.
+
 ## [0.29.0] - 2026-08-27
 
 ### Added
