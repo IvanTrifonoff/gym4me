@@ -1,3 +1,20 @@
+## [0.27.0] - 2026-08-27
+
+### Added
+- Вынесен Athlete Exercise Detail в отдельный модуль.
+- Инструкции упражнений загружаются лениво только при открытии detail.
+- GIF/media URL нормализуются и безопасно кодируются.
+- Добавлены accessibility labels, lazy loading и понятные loading/error states.
+- Пользовательские упражнения не получают GIF и не используют каталог инструкций.
+
+### Verification
+- Frontend tests: 30 passed.
+- Frontend production build: passed.
+- Backend container tests: 20 passed, 1 skipped without TEST_DATABASE_URL.
+- Preview container smoke: API 200, frontend HTTPS 200.
+- PWA manifest and favicon: 200.
+- git diff --check: passed.
+
 ## [0.26.0] - 2026-08-27
 
 ### Added
