@@ -1,3 +1,24 @@
+## [0.26.0] - 2026-08-27
+
+### Added
+- Подготовлен отдельный preview deployment для `/opt/opengym-next`.
+- Добавлены PWA-ресурсы `manifest.webmanifest` и `favicon.svg`.
+- Preview опубликован на `https://gym4me.trfnv.ru` через отдельный loopback frontend port `3381`.
+- API preview работает на loopback port `3311` и не использует production `/opt/opengym`.
+
+### Operations and security
+- Используется отдельный Compose project `gym4me-preview` и отдельный named volume.
+- Production ports, production database и production secrets не подключались.
+- HTTP перенаправляется на HTTPS; сертификат Let's Encrypt выпущен для `gym4me.trfnv.ru`.
+
+### Verification
+- Backend container tests: 20 passed, 1 skipped without `TEST_DATABASE_URL`.
+- Frontend tests: 27 passed.
+- Frontend production build: passed.
+- API health: 200.
+- Public frontend, manifest and favicon over HTTPS: 200.
+- `git diff --check`: passed.
+
 # Changelog
 
 Все заметные изменения проекта фиксируются здесь. Версии используют [Semantic Versioning](https://semver.org/): `MAJOR.MINOR.PATCH`.

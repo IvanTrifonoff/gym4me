@@ -1,0 +1,12 @@
+{
+  "name": "Gym4me",
+  "short_name": "Gym4me",
+  "description": "Тренировки, прогресс и связь со своим тренером",
+  "lang": "ru",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f6f8fb",
+  "theme_color": "#000000",
+  "icons": []
+}
