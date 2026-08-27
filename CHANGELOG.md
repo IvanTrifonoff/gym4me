@@ -2,6 +2,37 @@
 
 Все заметные изменения проекта фиксируются здесь. Версии используют [Semantic Versioning](https://semver.org/): `MAJOR.MINOR.PATCH`.
 
+## [0.12.0] - 2026-08-27
+
+### Added
+- Подключён Athlete Workout UI к новому модульному frontend.
+- Добавлен запуск тренировки из routine и freestyle режима.
+- Добавлено отображение активной тренировки, прогресса и elapsed time.
+- Добавлено переключение выполненных подходов.
+- Добавлено завершение тренировки с записью в Athlete history.
+- Добавлен безопасный discard активной тренировки.
+- Plan, Library и Workout теперь доступны из единого Athlete PWA shell.
+
+### Architecture
+- UI использует Workout model, builder, logging и timer helpers.
+- Workout остаётся изолированным Athlete domain и не импортирует Trainer/Gym state.
+- History формируется через отдельный serializer.
+
+### Compatibility and security
+- Сохраняются Node.js/React/Vite стек, `gymsid`, passkey и Athlete API.
+- Состояние изменяется только через текущий Athlete store/API.
+- Production `/opt/opengym` не изменялся.
+
+### Verification
+- Backend tests: 12 passed, 0 failed.
+- Frontend tests: 15 passed, 0 failed.
+- Frontend production build: passed.
+- Node syntax check: passed.
+- `git diff --check`: passed.
+
+### Limitations
+- Activity heartbeat, server-side history adapter, полноценный rest timer UI и progression UI будут подключены отдельными срезами.
+
 ## [0.11.0] - 2026-08-27
 
 ### Added
