@@ -1,3 +1,20 @@
+## [0.34.0] - 2026-08-27
+
+### Added
+- Добавлен explicit bodyweight migration runner.
+- Добавлен реальный PostgreSQL integration test для migration, upsert и athlete isolation.
+- Проверено ограничение веса на уровне PostgreSQL CHECK constraint.
+- Исправлена нормализация PostgreSQL DATE в API repository.
+
+### Verification
+- Backend container tests: 22 passed, 2 skipped without TEST_DATABASE_URL.
+- Real PostgreSQL bodyweight integration: 1 passed.
+- Frontend tests: 38 passed.
+- Frontend production build: passed.
+- Bodyweight endpoint without auth: 401.
+- Preview API health, HTTPS and PWA smoke: passed.
+- git diff --check: passed.
+
 ## [0.33.0] - 2026-08-27
 
 ### Added
