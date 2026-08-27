@@ -1,3 +1,19 @@
+## [0.28.0] - 2026-08-27
+
+### Added
+- Завершён перенос Athlete Exercise Detail в отдельный компонент.
+- Добавлен lazy loader инструкций с отменой обновления после размонтирования.
+- Добавлены безопасные media URL, lazy GIF loading и accessibility подписи.
+- Пользовательские упражнения изолированы от каталога GIF и инструкций.
+
+### Verification
+- Frontend tests: 30 passed.
+- Frontend production build: passed.
+- Backend container tests: 20 passed, 1 skipped без TEST_DATABASE_URL.
+- Preview API health: 200.
+- Preview HTTPS, manifest и favicon: 200.
+- git diff --check: passed.
+
 ## [0.27.0] - 2026-08-27
 
 ### Added
