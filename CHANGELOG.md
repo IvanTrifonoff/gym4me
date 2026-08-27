@@ -2,6 +2,30 @@
 
 Все заметные изменения проекта фиксируются здесь. Версии используют [Semantic Versioning](https://semver.org/): `MAJOR.MINOR.PATCH`.
 
+## [0.11.0] - 2026-08-27
+
+### Added
+- Добавлен изолированный Workout timer module.
+- Добавлены deterministic elapsed/rest deadline helpers.
+- Добавлен timed set result helper.
+- Добавлен activity heartbeat payload builder для будущего API adapter.
+- Таймеры не зависят от Trainer/Gym domains и внешних библиотек.
+
+### Compatibility and security
+- Сохранены Node.js/React/Vite стек, passkey, `gymsid`, Athlete API и PWA shell.
+- Activity payload не содержит credentials или приватные поля спортсмена.
+- Production `/opt/opengym` не изменялся.
+
+### Verification
+- Backend tests: 12 passed, 0 failed.
+- Frontend tests: 15 passed, 0 failed.
+- Frontend production build: passed.
+- Node syntax check: passed.
+- `git diff --check`: passed.
+
+### Next
+- Следующий срез подключит Workout UI к active state и Plan.
+
 ## [0.10.0] - 2026-08-27
 
 ### Added

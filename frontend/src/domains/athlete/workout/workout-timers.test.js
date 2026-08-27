@@ -1,0 +1,3 @@
+import { describe, expect, it } from 'vitest';
+import { activityPayload, elapsedSeconds, formatElapsed, restDeadline, timedSetResult } from './workout-timers.js';
+describe('Workout timers', () => { it('formats elapsed and rest deadlines deterministically', () => { expect(elapsedSeconds(1000, 61000)).toBe(60); expect(formatElapsed(61)).toBe('1:01'); expect(restDeadline(1000, 90)).toBe(91000); }); it('records timed work and activity payload', () => { expect(timedSetResult(1000, 36000)).toEqual({ sec: 35, done: true }); expect(activityPayload({ status: 'active', name: 'Сила', start: 100 }, { done: 2, total: 4 }, 999)).toMatchObject({ active: true, setsDone: 2, setsTotal: 4, startedAt: 100 }); }); });
