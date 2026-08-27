@@ -2,6 +2,29 @@
 
 Все заметные изменения проекта фиксируются здесь. Версии используют [Semantic Versioning](https://semver.org/): `MAJOR.MINOR.PATCH`.
 
+## [0.19.0] - 2026-08-27
+
+### Added
+- Добавлен Athlete activity DTO/adapter на Node API.
+- Добавлен endpoint `POST /api/v1/athlete/activity`.
+- Добавлено bounded presence repository с изоляцией по athlete id.
+- Добавлен frontend heartbeat при активной тренировке.
+- Добавлена очистка presence при завершении или уходе со страницы.
+- В heartbeat передаются только имя тренировки и агрегированный прогресс.
+
+### Security and compatibility
+- Credentials, passkey, полный Athlete state и секреты не входят в activity payload.
+- Endpoint использует legacy `gymsid` Actor authentication.
+- Trainer/Gym domains не получают доступ к Athlete internals.
+- Production `/opt/opengym` не изменялся.
+
+### Verification
+- Backend tests: 14 passed, 0 failed.
+- Frontend tests: 24 passed, 0 failed.
+- Frontend production build: passed.
+- Node syntax check: passed.
+- `git diff --check`: passed.
+
 ## [0.18.0] - 2026-08-27
 
 ### Added
