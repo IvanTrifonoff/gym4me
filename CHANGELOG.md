@@ -2,6 +2,25 @@
 
 Все заметные изменения проекта фиксируются здесь. Версии используют [Semantic Versioning](https://semver.org/): `MAJOR.MINOR.PATCH`.
 
+## [0.3.1] - 2026-08-27
+
+### Added
+- Исполняемый quality-gate для последовательности release-проверок.
+- Корневые `npm test`, `npm run build` и `npm run verify`.
+- Backend `npm test` и syntax check на Node.js.
+- Проверка совпадения версий `VERSION` и package metadata.
+- Проверка наличия текущей версии в changelog.
+- Проверка, что runtime secrets/data не отслеживаются Git.
+
+### Verification
+- Backend contract tests: 12 passed, 0 failed.
+- Release verification: passed.
+- `node --check api/src/main.js`: passed.
+- Frontend build не запускался: зависимости нового frontend пока не установлены в `/opt/opengym-next`; это отдельный следующий этап.
+
+### Process
+- Commit запрещён при падении build, tests, diff check или version verification.
+
 ## [0.3.0] - 2026-08-27
 
 ### Added
