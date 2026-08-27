@@ -2,6 +2,37 @@
 
 Все заметные изменения проекта фиксируются здесь. Версии используют [Semantic Versioning](https://semver.org/): `MAJOR.MINOR.PATCH`.
 
+## [0.21.0] - 2026-08-27
+
+### Added
+- Добавлены отдельные Dockerfiles для Node API и React/Vite frontend.
+- Добавлен `docker-compose.next.yml` для параллельного запуска `gym4me`.
+- По умолчанию используются только loopback-порты `3310` и `3380`.
+- Athlete runtime data хранится в отдельном named volume.
+- Production data, secrets и PostgreSQL не монтируются в новый compose.
+- Добавлен `.dockerignore` и документация `docs/DOCKER.md`.
+
+### Fixes
+- Исправлен API Docker layout: тесты и исходники теперь доступны по одинаковым путям внутри образа.
+- API listener запускается явным `GYM4ME_START_SERVER=1`.
+
+### Security
+- Production `/opt/opengym` не затрагивается.
+- Runtime `SESSION_SECRET` передаётся только environment variable.
+- Compose не публикует сервисы наружу по умолчанию.
+
+### Verification
+- API image build: passed.
+- Frontend image build: passed.
+- Container backend tests: 15 passed, 0 failed.
+- Container API smoke: `/api/health` 200.
+- Container frontend smoke: HTTP 200.
+- Frontend tests: 24 passed, 0 failed.
+- `git diff --check`: passed.
+
+### Limitation
+- NPM сообщает 2 зависимости frontend с audit warnings; автоматический `npm audit fix` не выполнялся, чтобы не менять lockfile без отдельного dependency-review.
+
 ## [0.20.0] - 2026-08-27
 
 ### Added

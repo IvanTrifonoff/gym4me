@@ -1,0 +1,28 @@
+name: gym4me-next
+services:
+  api:
+    build:
+      context: .
+      dockerfile: api/Dockerfile
+    environment:
+      NODE_ENV: production
+      GYM4ME_START_SERVER: "1"
+      PORT: 3100
+      ATHLETE_DATA_DIR: /var/lib/gym4me/data
+      SESSION_SECRET: ${GYM4ME_SESSION_SECRET:-}
+    volumes:
+      - gym4me_data:/var/lib/gym4me/data
+    ports:
+      - "127.0.0.1:${GYM4ME_API_PORT:-3310}:3100"
+    restart: unless-stopped
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    ports:
+      - "127.0.0.1:${GYM4ME_WEB_PORT:-3380}:80"
+    depends_on:
+      - api
+    restart: unless-stopped
+volumes:
+  gym4me_data:
