@@ -2,6 +2,29 @@
 
 Все заметные изменения проекта фиксируются здесь. Версии используют [Semantic Versioning](https://semver.org/): `MAJOR.MINOR.PATCH`.
 
+## [0.23.0] - 2026-08-27
+
+### Added
+- Добавлен реальный PostgreSQL integration test для `athlete_workout_history`.
+- Проверены migration, INSERT, SELECT, `ON CONFLICT` upsert и изоляция двух спортсменов.
+- Добавлены API history service tests для Actor scoping и database-unavailable fallback.
+- Docker API image исправлен для запуска всех contract tests внутри собранного образа.
+- Compose/API smoke проверены на loopback-портах без production deployment.
+
+### Security and safety
+- Integration test использует временный PostgreSQL container и удаляет тестовую таблицу после выполнения.
+- Production PostgreSQL, secrets и `/opt/opengym` не затрагиваются.
+- Новый history adapter не подключается автоматически к production.
+
+### Verification
+- Real PostgreSQL integration test: 1 passed, 0 failed.
+- Backend tests: 19 passed, 1 skipped without TEST_DATABASE_URL.
+- Frontend tests: 24 passed, 0 failed.
+- Frontend production build: passed.
+- API image build: passed.
+- Container API tests: 20 tests, 19 passed, 1 skipped.
+- `git diff --check`: passed.
+
 ## [0.22.0] - 2026-08-27
 
 ### Added
