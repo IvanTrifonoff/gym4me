@@ -26,5 +26,21 @@ services:
     depends_on:
       - api
     restart: unless-stopped
+  bodyweight-db:
+    image: postgres:14-alpine
+    profiles: [bodyweight-db]
+    environment:
+      POSTGRES_DB: gym4me
+      POSTGRES_USER: gym4me
+      POSTGRES_PASSWORD: ${GYM4ME_DB_PASSWORD:-preview-only-change-me}
+    volumes:
+      - gym4me_bodyweight_db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U gym4me -d gym4me"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+    restart: unless-stopped
 volumes:
   gym4me_data:
+  gym4me_bodyweight_db:

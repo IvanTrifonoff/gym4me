@@ -1,3 +1,26 @@
+## [0.36.0] - 2026-08-27
+
+### Added
+- Добавлен opt-in Compose profile  с PostgreSQL 14 Alpine.
+- Добавлен PostgreSQL healthcheck и отдельный named volume.
+- API подключается к profile database только через явные  и .
+- Обновлена документация обычного preview и database profile запуска.
+
+### Safety
+- Базовый compose запуск не требует database credentials и не стартует PostgreSQL profile.
+- Production database, secrets и  не затрагивались.
+
+### Verification
+- Compose base config: passed.
+- Compose profile config: passed.
+- Backend tests: 22 passed, 2 skipped.
+- Frontend tests: 38 passed.
+- Frontend production build: passed.
+- Preview API health: 200.
+- Bodyweight endpoint without auth: 401.
+- Preview HTTPS and PWA smoke: passed.
+- git diff --check: passed.
+
 ## [0.35.0] - 2026-08-27
 
 ### Added

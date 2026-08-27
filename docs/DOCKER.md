@@ -14,15 +14,26 @@
 ## Данные и секреты
 
 - Athlete runtime data находится в Docker named volume `gym4me_data`;
+- bodyweight PostgreSQL data — в отдельном volume `gym4me_bodyweight_db`;
 - production `/opt/opengym/data` не монтируется;
-- `SESSION_SECRET` передаётся только через окружение;
-- пустой secret оставляет authenticated API закрытым;
-- PostgreSQL пока намеренно не подключается, пока не завершён отдельный migration adapter.
+- secrets передаются через окружение и не коммитятся.
 
-## Запуск
+## Обычный preview
 
 ```bash
 GYM4ME_SESSION_SECRET='use-a-long-runtime-secret' docker compose -f docker-compose.next.yml up -d --build
 ```
 
-Это не deploy и не переключает домен. Перед подключением reverse proxy обязательны smoke-тесты и отдельное согласование.
+PostgreSQL profile по умолчанию выключен.
+
+## Preview с bodyweight PostgreSQL
+
+```bash
+export GYM4ME_SESSION_SECRET='use-a-long-runtime-secret'
+export GYM4ME_DB_PASSWORD='use-a-separate-db-password'
+export GYM4ME_DATABASE_URL='postgresql://gym4me:use-a-separate-db-password@bodyweight-db:5432/gym4me'
+export ATHLETE_BODYWEIGHT_PG=1
+docker compose -f docker-compose.next.yml --profile bodyweight-db up -d --build
+```
+
+Профиль запускается только явно через `--profile bodyweight-db`; production database не используется.
