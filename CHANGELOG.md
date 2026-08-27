@@ -1,3 +1,23 @@
+## [0.37.0] - 2026-08-27
+
+### Added
+- Проверен полноценный DB-backed preview через Compose profile .
+- Startup migration автоматически создаёт  при включённом feature flag.
+- Выполнен authenticated smoke .
+- Подтверждены запись в PostgreSQL, upsert и Actor isolation.
+- Временный DB-backed preview запускается отдельно от публичного preview и production.
+
+### Verification
+- PostgreSQL container healthcheck: passed.
+- Authenticated bodyweight GET: 200.
+- Authenticated bodyweight POST: 201.
+- Database row persistence: passed.
+- Backend tests: 22 passed, 2 skipped.
+- Frontend tests: 38 passed.
+- Frontend production build: passed.
+- Public preview HTTPS smoke: passed.
+- git diff --check: passed.
+
 ## [0.36.0] - 2026-08-27
 
 ### Added
