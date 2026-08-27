@@ -2,6 +2,29 @@
 
 Все заметные изменения проекта фиксируются здесь. Версии используют [Semantic Versioning](https://semver.org/): `MAJOR.MINOR.PATCH`.
 
+## [0.17.0] - 2026-08-27
+
+### Added
+- Stats расширен фильтрацией по периодам 7/30/90 дней и «всё время».
+- Добавлены bodyweight analytics: first/latest/delta/average.
+- Добавлен volume series по тренировкам.
+- Добавлены периодические exercise metrics и streak days.
+- Stats UI получил карточки веса тела, объёма, подходов и активных дней.
+- Сохранён единый Athlete PWA style и ownership границы.
+
+### Compatibility and security
+- Метрики строятся только из Athlete-owned state.
+- Trainer/Gym данные и auth/passkey не подключаются к Stats store.
+- Сохранены Node.js/React/Vite/Zustand, `gymsid` и PWA shell.
+- Production `/opt/opengym` не изменялся.
+
+### Verification
+- Backend tests: 12 passed, 0 failed.
+- Frontend tests: 23 passed, 0 failed.
+- Frontend production build: passed.
+- Node syntax check: passed.
+- `git diff --check`: passed.
+
 ## [0.16.0] - 2026-08-27
 
 ### Added
