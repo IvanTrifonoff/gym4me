@@ -10,6 +10,8 @@ services:
       PORT: 3100
       ATHLETE_DATA_DIR: /var/lib/gym4me/data
       SESSION_SECRET: ${GYM4ME_SESSION_SECRET:-}
+      ATHLETE_BODYWEIGHT_PG: ${ATHLETE_BODYWEIGHT_PG:-0}
+      DATABASE_URL: ${GYM4ME_DATABASE_URL:-}
     volumes:
       - gym4me_data:/var/lib/gym4me/data
     ports:

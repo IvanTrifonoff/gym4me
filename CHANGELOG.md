@@ -1,3 +1,20 @@
+## [0.35.0] - 2026-08-27
+
+### Added
+- Добавлен explicit feature flag  для включения PostgreSQL persistence.
+- Добавлен startup migration hook, выполняющий миграцию только при явном включении флага.
+- Compose получил безопасные переменные  и .
+- Значение флага по умолчанию , поэтому существующий preview fallback не изменён.
+
+### Verification
+- Backend container tests: 22 passed, 2 skipped without TEST_DATABASE_URL.
+- Frontend tests: 38 passed.
+- Frontend production build: passed.
+- Preview API health: 200.
+- Bodyweight endpoint without auth: 401.
+- Preview HTTPS and PWA smoke: passed.
+- git diff --check: passed.
+
 ## [0.34.0] - 2026-08-27
 
 ### Added
