@@ -1,3 +1,20 @@
+## [0.33.0] - 2026-08-27
+
+### Added
+- Добавлен server-preferred merge для bodyweight измерений.
+- Локальные offline-точки сохраняются, если их даты отсутствуют на сервере.
+- При конфликте даты серверное значение считается authoritative.
+- Добавлены тесты merge, remote load и offline save.
+- Синхронизация не создаёт дубликаты по дате.
+
+### Verification
+- Frontend tests: 38 passed.
+- Frontend production build: passed.
+- Backend container tests: 22 passed, 1 skipped without TEST_DATABASE_URL.
+- Bodyweight endpoint without auth: 401.
+- Preview HTTPS and PWA smoke: passed.
+- git diff --check: passed.
+
 ## [0.32.0] - 2026-08-27
 
 ### Added
