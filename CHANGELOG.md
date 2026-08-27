@@ -2,6 +2,29 @@
 
 Все заметные изменения проекта фиксируются здесь. Версии используют [Semantic Versioning](https://semver.org/): `MAJOR.MINOR.PATCH`.
 
+## [0.18.0] - 2026-08-27
+
+### Added
+- Добавлен Athlete RestTimer UI поверх Workout active state.
+- Добавлен countdown с форматированием `mm:ss`.
+- Добавлен skip rest action.
+- Rest deadline сохраняется в active workout при переходах UI.
+- Workout UI показывает прогресс и таймер тренировки.
+- Добавлены deterministic timer helpers и regression tests.
+
+### Compatibility and security
+- Сохранён исходный Node.js/React/Vite/Zustand стек.
+- Passkey, `gymsid`, Athlete API и PWA shell не изменялись.
+- Timer state не содержит credentials или cross-user data.
+- Production `/opt/opengym` не изменялся.
+
+### Verification
+- Backend tests: 12 passed, 0 failed.
+- Frontend tests: 24 passed, 0 failed.
+- Frontend production build: passed.
+- Node syntax check: passed.
+- `git diff --check`: passed.
+
 ## [0.17.0] - 2026-08-27
 
 ### Added
