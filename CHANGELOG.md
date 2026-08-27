@@ -2,6 +2,33 @@
 
 Все заметные изменения проекта фиксируются здесь. Версии используют [Semantic Versioning](https://semver.org/): `MAJOR.MINOR.PATCH`.
 
+## [0.7.0] - 2026-08-27
+
+### Added
+- Перенесён изолированный Athlete Exercise Library module.
+- Добавлен поиск по названию, группе мышц и оборудованию.
+- Добавлены русские названия упражнений, включая «Тяга штанги в наклоне».
+- Добавлена поддержка пользовательских `customEx` только в состоянии текущего спортсмена.
+- Добавлен detail view упражнения.
+- GIF-инструкция загружается только после открытия карточки и использует `loading=lazy`.
+- Текстовые инструкции загружаются через отдельный lazy loader.
+
+### Compatibility and security
+- Library не импортирует Trainer/Gym domains.
+- Passkey, `gymsid`, Zustand Athlete store и API boundary сохранены.
+- Custom exercises не попадают в глобальный каталог.
+- Production `/opt/opengym` не изменялся.
+
+### Verification
+- Backend tests: 12 passed, 0 failed.
+- Frontend tests: 6 passed, 0 failed.
+- Frontend production build: passed.
+- Node syntax check: passed.
+- `git diff --check`: passed.
+
+### Limitations
+- Каталог в новом проекте пока содержит минимальный переносимый набор упражнений; полный legacy dataset переносится отдельным data-slice, чтобы не увеличивать initial bundle.
+
 ## [0.6.0] - 2026-08-27
 
 ### Added
