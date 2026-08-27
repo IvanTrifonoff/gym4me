@@ -1,3 +1,21 @@
+## [0.29.0] - 2026-08-27
+
+### Added
+- Добавлена Athlete bodyweight model с нормализацией и безопасной валидацией.
+- Добавлен журнал измерений веса тела в настройках спортсмена.
+- Повторная запись за ту же дату обновляет измерение без дублей.
+- Список измерений сортируется по дате и показывает последние значения.
+- Сохранение использует существующий Actor-scoped Athlete state API.
+- Статистика веса тела продолжает использовать общий нормализованный формат.
+
+### Verification
+- Frontend tests: 33 passed.
+- Frontend production build: passed.
+- Backend container tests: 20 passed, 1 skipped without TEST_DATABASE_URL.
+- Preview API health: 200.
+- Preview HTTPS and PWA resources: passed.
+- git diff --check: passed.
+
 ## [0.28.0] - 2026-08-27
 
 ### Added
