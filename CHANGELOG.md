@@ -1,3 +1,20 @@
+## [0.32.0] - 2026-08-27
+
+### Added
+- Добавлен frontend bodyweight sync adapter.
+- Измерения загружаются через .
+- Новые измерения отправляются через .
+- При offline/API failure сохраняется локальный Athlete state без потери данных.
+- Добавлены тесты server-success, offline fallback и Actor-scoped API boundary.
+
+### Verification
+- Backend container tests: 22 passed, 1 skipped without TEST_DATABASE_URL.
+- Frontend tests: 37 passed.
+- Frontend production build: passed.
+- API bodyweight without auth: 401.
+- Preview API health and HTTPS smoke: passed.
+- git diff --check: passed.
+
 ## [0.31.0] - 2026-08-27
 
 ### Added

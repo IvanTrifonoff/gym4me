@@ -1,21 +1,31 @@
-import { useState } from 'react';
-import { addBodyweight, bodyweightPoints } from './bodyweight-model.js';
+import { useEffect, useState } from 'react';
+import { bodyweightPoints } from './bodyweight-model.js';
+import { loadBodyweight, saveBodyweight } from './bodyweight-sync.js';
 
 export function BodyweightLog({ state, saving, update }) {
   const [weight, setWeight] = useState('');
   const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
   const [message, setMessage] = useState('');
-  const points = bodyweightPoints(state);
+  const [points, setPoints] = useState(() => bodyweightPoints(state));
+
+  useEffect(() => {
+    let alive = true;
+    loadBodyweight(state).then(value => alive && setPoints(value));
+    return () => { alive = false; };
+  }, [state.bodyweight]);
+
   const submit = async event => {
     event.preventDefault();
     try {
-      await update({ bodyweight: addBodyweight(state, { w: weight, d: date }) });
+      const next = await saveBodyweight(state, { w: weight, d: date }, update);
+      setPoints(next);
       setWeight('');
       setMessage('Измерение сохранено');
-    } catch (error) {
+    } catch {
       setMessage('Введите корректный вес');
     }
   };
+
   return <section className="pwa-card bodyweight-log">
     <h2>Вес тела</h2>
     <form onSubmit={submit}>
