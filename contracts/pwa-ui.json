@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "scope": "all frontend domains",
+  "mustPreserve": [
+    "single content width",
+    "safe-area insets",
+    "dark/light surface ramp",
+    "accent tokens",
+    "typography scale",
+    "bottom tab bar behavior",
+    "modal and toast roots",
+    "reduced-motion support",
+    "focus-visible accessibility"
+  ],
+  "rule": "Gym, Trainer and Athlete pages use shared PWA shell and tokens; domain-specific screens may add components but must not redefine global geometry."
+}

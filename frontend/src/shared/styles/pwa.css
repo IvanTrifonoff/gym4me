@@ -1,0 +1,38 @@
+:root {
+  --pwa-bg: #000;
+  --pwa-surface: #1c1c1e;
+  --pwa-surface-2: #2c2c2e;
+  --pwa-label: #fff;
+  --pwa-label-2: rgba(235,235,245,.60);
+  --pwa-label-3: rgba(235,235,245,.32);
+  --pwa-accent: #30d158;
+  --pwa-radius-card: 14px;
+  --pwa-content-width: 560px;
+  --pwa-safe-top: env(safe-area-inset-top, 0px);
+  --pwa-safe-bottom: env(safe-area-inset-bottom, 0px);
+  --pwa-motion-fast: 140ms;
+  --pwa-motion-medium: 220ms;
+  --pwa-easing: cubic-bezier(.32,.72,0,1);
+}
+
+.pwa-shell {
+  min-height: 100dvh;
+  background: var(--pwa-bg);
+  color: var(--pwa-label);
+  padding-top: var(--pwa-safe-top);
+  padding-bottom: var(--pwa-safe-bottom);
+}
+
+.pwa-content {
+  width: min(100%, var(--pwa-content-width));
+  margin: 0 auto;
+  padding: 8px 16px 128px;
+}
+
+.pwa-card { background: var(--pwa-surface); border-radius: var(--pwa-radius-card); }
+.pwa-tabbar { padding-bottom: var(--pwa-safe-bottom); }
+.pwa-modal-root, .pwa-toast { position: fixed; inset: 0; pointer-events: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}

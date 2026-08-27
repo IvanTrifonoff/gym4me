@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "owner": "athlete",
+  "description": "Полное пользовательское состояние спортсмена, включая настройки, тренировки и UI preferences.",
+  "settings": ["unit", "restSec", "sound", "keepAwake", "lang", "theme", "accent", "body", "targetW", "gifSize", "effort", "reminder"],
+  "training": ["bodyweight", "routines", "week", "dayPlan", "exWeights", "workouts", "active"],
+  "content": ["customEx"],
+  "rules": [
+    "customEx принадлежит только athlete и не является глобальным каталогом",
+    "active может быть device-local и не должен перетирать серверное состояние",
+    "trainer получает только разрешённый DTO, а не полный state",
+    "каждое неизвестное поле игнорируется при записи через API"
+  ]
+}
